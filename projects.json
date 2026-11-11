@@ -1,0 +1,86 @@
+[
+  {
+    "id": "anilog",
+    "slug": "anilog",
+    "name": "AniLog",
+    "category": "android",
+    "description": {
+      "bn": "অ্যানিমে প্রেমীদের জন্য আধুনিক ও ব্যক্তিগত অ্যানিমে ট্র্যাকিং এবং ডিসকভারি অ্যাপ্লিকেশন। অফলাইন সমর্থন ও সহজ ইন্টারফেস।",
+      "en": "Modern, distraction-free anime tracking and discovery application for Android. Features custom lists, offline logging, and clean UI."
+    },
+    "icon": "assets/images/logo.svg",
+    "landingPage": "landingpage/anilog.html",
+    "demoUrl": "",
+    "downloadUrl": "https://omor.asf.sale/landingpage/anilog.html",
+    "githubUrl": "https://github.com/muhammedomor/AniLog",
+    "status": "published",
+    "featured": true,
+    "version": "1.4.2",
+    "tags": ["Android", "Kotlin", "Anime", "Offline First", "Material 3"],
+    "createdAt": "2024-03-15",
+    "updatedAt": "2024-10-20"
+  },
+  {
+    "id": "bangla-dev-kit",
+    "slug": "bangla-dev-kit",
+    "name": "BanglaDevKit",
+    "category": "tools",
+    "description": {
+      "bn": "বাংলা টেক্সট প্রসেসিং, ইউনিকোড কনভার্সন এবং ফন্ট ইউটিলিটির জন্য লাইটওয়েট ডেভেলপার টুলকিট।",
+      "en": "Lightweight developer toolkit for Bengali text normalization, unicode conversion, and typography utilities."
+    },
+    "icon": "assets/images/logo.svg",
+    "landingPage": "projects/bangla-dev-kit/",
+    "demoUrl": "https://omor.asf.sale/",
+    "downloadUrl": "",
+    "githubUrl": "https://github.com/muhammedomor",
+    "status": "published",
+    "featured": true,
+    "version": "2.1.0",
+    "tags": ["Web", "Tool", "Unicode", "Bengali"],
+    "createdAt": "2024-05-10",
+    "updatedAt": "2024-11-01"
+  },
+  {
+    "id": "quick-budget-bd",
+    "slug": "quick-budget-bd",
+    "name": "QuickBudget BD",
+    "category": "android",
+    "description": {
+      "bn": "ব্যক্তিগত আয়-ব্যয় হিসাব রাখার জন্য গোপনীয়তা-সুরক্ষিত দ্রুতগতির অ্যান্ড্রয়েড ফাইন্যান্স ট্র্যাকার।",
+      "en": "Fast, privacy-respecting daily personal expense and budget manager tailored for Bangladeshi currency and habits."
+    },
+    "icon": "assets/images/logo.svg",
+    "landingPage": "projects/quick-budget-bd/",
+    "demoUrl": "",
+    "downloadUrl": "",
+    "githubUrl": "https://github.com/muhammedomor",
+    "status": "published",
+    "featured": false,
+    "version": "1.0.5",
+    "tags": ["Android", "Finance", "Privacy", "Compose"],
+    "createdAt": "2024-07-02",
+    "updatedAt": "2024-09-18"
+  },
+  {
+    "id": "neon-orbit",
+    "slug": "neon-orbit",
+    "name": "Neon Orbit",
+    "category": "games",
+    "description": {
+      "bn": "রেট্রো সিন্থওয়েভ মিউজিক ও নিয়ন গ্রাফিক্সে সাজানো মিনিমালিস্টিক আর্কেড গ্র্যাভিটি গেম।",
+      "en": "A minimalist orbital physics arcade game featuring dark-neon aesthetics and reactive audio."
+    },
+    "icon": "assets/images/logo.svg",
+    "landingPage": "projects/neon-orbit/",
+    "demoUrl": "",
+    "downloadUrl": "",
+    "githubUrl": "https://github.com/muhammedomor",
+    "status": "published",
+    "featured": true,
+    "version": "1.1.0",
+    "tags": ["Game", "Canvas", "Neon", "Arcade"],
+    "createdAt": "2024-08-14",
+    "updatedAt": "2024-10-30"
+  }
+]

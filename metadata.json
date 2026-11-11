@@ -1,0 +1,6 @@
+{
+  "name": "Omor Project Hub",
+  "description": "Personal project hub and mobile-first GitHub-powered admin CMS for Omor Projects",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

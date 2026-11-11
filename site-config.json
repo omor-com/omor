@@ -1,0 +1,31 @@
+{
+  "siteName": "Omor Project Hub",
+  "ownerName": "Muhammed Omor",
+  "tagline": {
+    "en": "Android Applications, Web Tools & Digital Products",
+    "bn": "অ্যান্ড্রয়েড অ্যাপ্লিকেশন, ওয়েব টুল ও ডিজিটাল প্রজেক্ট"
+  },
+  "intro": {
+    "en": "Welcome to my central project directory. Explore independent Android apps, utility software, games, and creative web tools.",
+    "bn": "আমার ব্যক্তিগত প্রজেক্ট হাবে স্বাগতম। এখানে আমার তৈরি অ্যান্ড্রয়েড অ্যাপ, ওয়েব ইউটিলিটি, গেম ও সফটওয়্যার এক্সপ্লোর করুন।"
+  },
+  "aboutText": {
+    "en": "I am an independent software creator passionate about crafting clean Android applications, privacy-focused utilities, and fast web tools. Every project here is developed with attention to user experience, reliability, and modern engineering standards.",
+    "bn": "আমি একজন স্বাধীন সফটওয়্যার নির্মাতা। পরিচ্ছন্ন অ্যান্ড্রয়েড অ্যাপ্লিকেশন, ইউটিলিটি সফটওয়্যার এবং আধুনিক ওয়েব টুল তৈরিতে আমি কাজ করি। প্রতিটি প্রজেক্ট সহজ ব্যবহারযোগ্যতা, গতি ও নির্ভরতার সাথে তৈরি।"
+  },
+  "supportKoriUrl": "https://www.supportkori.com/muhammedomor",
+  "primaryDomain": "https://omor.asf.sale/",
+  "githubUrl": "https://github.com/muhammedomor",
+  "contactEmail": "muhammedomor.dev@gmail.com",
+  "defaultLanguage": "en",
+  "defaultTheme": "dark",
+  "avatarUrl": "assets/images/logo.svg",
+  "categories": [
+    { "id": "all", "label": { "en": "All Projects", "bn": "সকল প্রজেক্ট" } },
+    { "id": "android", "label": { "en": "Android Apps", "bn": "অ্যান্ড্রয়েড অ্যাপ" } },
+    { "id": "web", "label": { "en": "Web Applications", "bn": "ওয়েব অ্যাপ্লিকেশন" } },
+    { "id": "tools", "label": { "en": "Developer Tools", "bn": "ডেভেলপার টুল" } },
+    { "id": "games", "label": { "en": "Games", "bn": "গেম" } },
+    { "id": "digital", "label": { "en": "Digital Products", "bn": "ডিজিটাল প্রোডাক্ট" } }
+  ]
+}

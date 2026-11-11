@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Outer accent rounded border -->
+    <path
+        android:strokeColor="#A855F7"
+        android:strokeWidth="2.5"
+        android:fillColor="#171426"
+        android:pathData="M32,24 h44 a8,8 0 0 1 8,8 v44 a8,8 0 0 1 -8,8 h-44 a8,8 0 0 1 -8,-8 v-44 a8,8 0 0 1 8,-8 z" />
+
+    <!-- Cyan outer ring -->
+    <path
+        android:strokeColor="#06B6D4"
+        android:strokeWidth="2"
+        android:fillColor="#00000000"
+        android:pathData="M 54, 34 a 20,20 0 1 0 0.1,0 Z" />
+
+    <!-- Central core "O" circle -->
+    <path
+        android:strokeColor="#C084FC"
+        android:strokeWidth="3.5"
+        android:fillColor="#00000000"
+        android:pathData="M 54, 42 a 12,12 0 1 0 0.1,0 Z" />
+
+    <!-- Center node -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M 54, 50 a 4,4 0 1 0 0.1,0 Z" />
+
+    <!-- Cross connecting data lines -->
+    <path
+        android:strokeColor="#06B6D4"
+        android:strokeWidth="1.5"
+        android:pathData="M24,54 L34,54 M74,54 L84,54 M54,24 L54,34 M54,74 L54,84" />
+</vector>

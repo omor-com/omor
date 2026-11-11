@@ -1,0 +1,925 @@
+MASTER DEVELOPMENT PROMPT
+
+OMOR PROJECT HUB — GitHub Pages + GitHub-Powered Admin CMS
+
+Act as a senior full-stack engineer, security-conscious web architect, UI/UX designer, and GitHub Pages deployment specialist. Design and implement a complete, production-quality personal project hub with a GitHub-powered administration panel.
+
+Do not deliver a static mockup, incomplete prototype, or a collection of disconnected code snippets. Deliver a cohesive, functional website with a practical mobile-first administration system.
+
+The website must be designed to work on Android phones, tablets, and desktop browsers. The owner should be able to manage the website primarily from a mobile phone without needing a computer.
+
+---
+
+1. PROJECT IDENTITY AND REQUIREMENTS
+
+Website name: Omor Project Hub
+Primary domain: https://omor.asf.sale/
+Admin URL: https://omor.asf.sale/wp-admin/
+SupportKori URL: https://www.supportkori.com/muhammedomor
+Existing AniLog landing page: https://omor.asf.sale/landingpage/anilog.html
+
+The project is a static website hosted on GitHub Pages with a client-side administration application that communicates with the GitHub REST API.
+
+The "/wp-admin/" route is only an administration URL inspired by WordPress. Do not install WordPress, PHP, or a database simply to implement this route.
+
+The main purpose of the website is to:
+
+- Introduce the owner and the projects they create.
+- Display Android applications, web applications, developer tools, games, and digital products.
+- Give every project its own independent landing page and public URL.
+- Provide a powerful administration panel for managing repository files.
+- Allow the owner to update the website from an Android phone.
+- Link directly to the owner's SupportKori profile.
+- Operate without a paid backend or mandatory external JavaScript libraries.
+
+Critical preservation requirement
+
+The existing website and GitHub Pages configuration may already contain important files and settings.
+
+Before modifying anything, inspect the existing repository structure if repository access is available.
+
+Preserve the following:
+
+1. The current custom domain configuration.
+2. The existing "CNAME" file and DNS-related configuration.
+3. The current GitHub Pages publishing branch and deployment workflow.
+4. The existing AniLog page at "/landingpage/anilog.html".
+5. Existing project assets, links, and unrelated files.
+6. Existing repository settings and deployment configuration.
+
+Do not rename, relocate, overwrite, or delete existing files merely to match the proposed architecture.
+
+If the existing structure differs from the proposed structure, adapt the implementation to the actual repository rather than forcing a migration.
+
+Never claim that deployment, repository inspection, or testing succeeded unless it was actually performed.
+
+---
+
+2. DESIGN SYSTEM AND VISUAL DIRECTION
+
+Create a premium, modern, mobile-first interface with a restrained dark-neon aesthetic.
+
+Primary visual style
+
+- Background: near-black and deep charcoal.
+- Primary accent: electric purple.
+- Secondary accent: cyan.
+- Text: high-contrast white and soft gray.
+- Borders: subtle dark-purple or neutral-gray outlines.
+- Cards: clean surfaces with moderate corner radii.
+- Typography: readable system fonts with appropriate Bengali fallbacks.
+- Icons: inline SVG icons or locally bundled SVG assets.
+
+Avoid excessive gradients, excessive glow, distracting animations, oversized headings, and unnecessary decorative effects.
+
+The design should look like a professional independent developer's product hub, not a generic AI-generated template.
+
+Responsive requirements
+
+- Mobile-first layouts.
+- Single-column cards on narrow screens.
+- Two- or three-column layouts on larger screens.
+- Touch-friendly controls.
+- Responsive navigation.
+- No horizontal overflow.
+- Comfortable spacing for Bengali text.
+- Proper keyboard navigation and visible focus indicators.
+- Reduced-motion support.
+- Accessible color contrast.
+
+Themes
+
+Implement both dark and light themes.
+
+Dark neon must be the default theme. The light theme must use appropriate backgrounds, borders, text colors, and accessible contrast.
+
+Persist the user's theme preference locally. The theme must work across the main website and the administration interface where practical.
+
+Languages
+
+Support Bengali and English.
+
+Provide a clear language switcher. Translate interface labels, navigation, search placeholders, categories, buttons, notices, and empty states.
+
+Project descriptions should support separate Bengali and English fields. Preserve the owner's original project names and URLs.
+
+Remember the selected language locally.
+
+---
+
+3. MAIN WEBSITE: HOME PAGE
+
+Create a complete main page at:
+
+"https://omor.asf.sale/"
+
+This is a personal introduction and project discovery hub, NOT a conventional résumé or portfolio template.
+
+The homepage must contain the following sections.
+
+A. Header
+
+Include:
+
+- Site logo or a clean text-based OMOR brand.
+- Home.
+- Projects.
+- Categories.
+- About.
+- A prominent Support My Work link.
+- Language switcher.
+- Theme switcher.
+- Responsive mobile menu.
+
+The Support My Work link must open this exact URL:
+
+https://www.supportkori.com/muhammedomor
+
+Use a real anchor with an accessible label. Open the external destination in a new tab with appropriate "rel" attributes.
+
+B. Hero section
+
+Include:
+
+- Owner's display name, initially configurable as Muhammed Omor.
+- A short, editable introduction.
+- A concise description of the types of projects published on the site.
+- A profile image that can be changed from the admin panel.
+- A primary Explore Projects button.
+- A secondary Support My Work button.
+
+Do not invent qualifications, employment history, awards, professional experience, or skills.
+
+If a profile photo is unavailable, use a neutral placeholder. Do not generate or substitute an unrelated person's photograph.
+
+C. Featured projects
+
+Show projects marked as featured in the project registry.
+
+Each card should support:
+
+- Project name.
+- Project icon or logo.
+- Short description.
+- Category.
+- Publication status.
+- View Details button.
+- Optional download, demo, or source-code links.
+
+Cards must link to the correct project-specific landing pages.
+
+D. All projects
+
+Implement:
+
+- Search by project name and description.
+- Category filters.
+- Optional sorting by name, recently updated, and featured status.
+- A clear-all-filters action.
+- Empty-state messages.
+- Responsive project cards.
+
+The search must work locally without a server or external search API.
+
+Only published projects should appear in the public project directory.
+
+Do not expose unpublished project descriptions or private administrative information in public page data.
+
+E. Categories
+
+Support configurable categories such as:
+
+- Android Apps
+- Web Applications
+- Developer Tools
+- Games
+- Digital Products
+- Other Projects
+
+Categories must be editable without rewriting the rendering logic.
+
+F. About section
+
+Provide a short editable introduction to the owner and their interest in creating applications, websites, and digital products.
+
+All text must be editable through the administration system.
+
+G. Support section
+
+Create a tasteful call-to-action section inviting visitors to support the owner's work.
+
+The destination must always be:
+
+https://www.supportkori.com/muhammedomor
+
+Do not implement a fake payment gateway or imitate SupportKori's payment interface.
+
+H. Footer
+
+Include configurable:
+
+- Owner or brand name.
+- Copyright notice.
+- GitHub profile URL, when supplied.
+- Contact email, when supplied.
+- SupportKori link.
+- Privacy policy link, if configured.
+- Back-to-top control.
+
+Do not invent social links, email addresses, or external profiles.
+
+---
+
+4. PROJECT REGISTRY
+
+Create a central project registry in "projects.js" or an equally suitable static data file.
+
+The main website must generate project cards dynamically from this registry.
+
+Each project record should support:
+
+- Unique ID.
+- Project name.
+- URL slug.
+- Category.
+- Bengali description.
+- English description.
+- Icon or logo path.
+- Landing page URL.
+- Optional demo URL.
+- Optional download URL.
+- Optional GitHub source URL.
+- Publication status.
+- Featured status.
+- Creation date, if available.
+- Last updated date, if available.
+- Optional version.
+- Optional tags.
+
+Use a consistent, documented data schema.
+
+Example record:
+
+{
+  id: "anilog",
+  slug: "anilog",
+  name: "AniLog",
+  category: "android",
+  description: {
+    bn: "অ্যানিমে ট্র্যাকিং অ্যাপ",
+    en: "Anime tracking application"
+  },
+  icon: "assets/images/anilog.png",
+  landingPage: "landingpage/anilog.html",
+  status: "published",
+  featured: true
+}
+
+This is an illustrative example, not permission to overwrite the existing AniLog page or invent its real download links.
+
+The registry must handle missing optional fields gracefully.
+
+Avoid duplicate project IDs and invalid paths.
+
+The administration interface must make it possible to add, edit, publish, unpublish, feature, and remove project records without manually rewriting the application's rendering code.
+
+Validate JSON or JavaScript data before committing changes.
+
+If practical, use a pure JSON file such as "projects.json" for easier validation and structured editing. Choose one canonical data source and do not maintain competing registries.
+
+---
+
+5. ADMINISTRATION PANEL
+
+Implement the administration application at:
+
+"/wp-admin/"
+
+Use "/wp-admin/index.html" as the entry point if the current hosting configuration supports this path.
+
+The administration panel must be a real working application, not a visual demonstration.
+
+Login screen
+
+Provide fields for:
+
+- GitHub username.
+- Repository owner.
+- Repository name.
+- Branch name.
+- GitHub Personal Access Token.
+- Remember Me checkbox.
+
+Allow the owner to configure the target repository and branch rather than hard-coding unknown values.
+
+Validate required fields and display helpful error messages.
+
+Use GitHub API requests to verify the supplied credentials and confirm that the authenticated user has the necessary permissions for the selected repository.
+
+A GitHub username alone must never be treated as authentication.
+
+Support a GitHub Classic Personal Access Token if explicitly selected by the owner, but explain that a fine-grained token restricted to the intended repository is preferable where the required API operations are supported.
+
+Never include a real token in source code, HTML, JavaScript bundles, public configuration files, logs, error messages, commit messages, or URLs.
+
+Never ask the AI developer to fabricate a token.
+
+Session management
+
+Because the site is static, there is no secure server-side session by default.
+
+Implement the safest practical browser-only behavior:
+
+- Default to session-only token storage.
+- Use "sessionStorage" for temporary sessions where appropriate.
+- If Remember Me is selected, clearly explain that persistent browser storage exposes the token to JavaScript executing in the same origin.
+- Require explicit consent before persisting a token.
+- Provide a visible Logout button.
+- Clear the token and related authentication state on logout.
+- Never store tokens in the project registry or other public website data.
+- Never transmit a token to any service other than the intended GitHub API origin.
+- Do not send tokens to analytics, third-party scripts, or external image hosts.
+
+Do not claim that "localStorage" encryption makes a client-side token secure against malicious same-origin JavaScript.
+
+If secure persistent authentication is required, explain the need for a server-side authentication component rather than pretending that static hosting can provide secure server sessions.
+
+Admin dashboard
+
+After authentication, display:
+
+- Connection status.
+- Repository owner/name.
+- Selected branch.
+- File and folder manager.
+- Project registry manager.
+- Site settings.
+- Upload interface.
+- Commit history.
+- Logout.
+
+Use a mobile-friendly sidebar or navigation drawer.
+
+The admin UI should use the same visual design system as the public website, with a clear distinction between administrative actions and public navigation.
+
+---
+
+6. GITHUB FILE MANAGER
+
+Use the official GitHub REST API.
+
+Relevant API operations include:
+
+- Retrieve repository information.
+- Retrieve repository contents.
+- Read file contents.
+- Create files.
+- Update files.
+- Delete files.
+- Retrieve commit history.
+- Upload binary content when supported by the chosen implementation.
+
+Follow the official API documentation and current permission requirements.
+
+File browser
+
+Allow the owner to:
+
+- Browse repository directories.
+- Navigate into folders.
+- Return to parent directories.
+- Search files by name.
+- View file type and size where available.
+- Open files for editing.
+- Preview public pages.
+- Copy public URLs.
+- Refresh the repository view.
+
+Show a loading indicator while retrieving repository data.
+
+Display understandable errors for authentication failures, permission problems, missing paths, rate limits, and network failures.
+
+File creation
+
+Support creating:
+
+- HTML files.
+- CSS files.
+- JavaScript files.
+- JSON files.
+- Markdown files.
+- SVG files.
+- Other supported text files.
+
+Allow the owner to specify a path such as:
+
+"example/name.html"
+
+Validate the path before submitting it.
+
+Prevent path traversal and malformed repository paths.
+
+Do not silently overwrite an existing file.
+
+Folder creation
+
+Git does not store empty directories directly.
+
+Create a folder using a safe placeholder file or by creating a file inside the new directory.
+
+Do not accidentally publish placeholder files as public pages.
+
+File editor
+
+Build a usable mobile-first editor for text-based files.
+
+Required features:
+
+- Syntax highlighting if available without unnecessary external dependencies.
+- Line numbers if practical.
+- Search within the current file.
+- Unsaved-changes indicator.
+- Save and Cancel controls.
+- File path display.
+- Commit message input.
+- Error handling.
+- Conflict detection.
+- Preview for supported files.
+
+Do not use "eval()" or execute arbitrary edited code inside the administration page.
+
+If a live preview is provided, use an appropriately sandboxed iframe and keep previewed untrusted content isolated from the administration origin.
+
+A full professional desktop-grade code editor is optional; reliability and mobile usability are more important than heavyweight dependencies.
+
+File upload
+
+Allow the owner to select and upload files from an Android phone.
+
+Support common image formats and appropriate static website assets.
+
+Use the correct GitHub API encoding for text and binary files.
+
+Validate file size and supported file types before upload.
+
+Show upload progress when possible.
+
+If a file exceeds the practical size limits of the chosen GitHub API method, explain the limitation instead of silently failing.
+
+File update
+
+Before updating a file:
+
+1. Retrieve the current file and its SHA.
+2. Display its current path.
+3. Validate the replacement content.
+4. Request a commit message.
+5. Submit the update using the correct current SHA.
+6. Confirm success only after GitHub confirms it.
+7. Refresh the file list and show the resulting commit details.
+
+Handle HTTP 409 conflicts and stale file SHA errors safely.
+
+Never overwrite a newer version without informing the user.
+
+File deletion
+
+Implement deletion with explicit confirmation.
+
+Display the full file path before deletion.
+
+Require a second confirmation for critical configuration files.
+
+Deleting a file should use the current file SHA as required by the API.
+
+For directories, enumerate the contained files and explain that GitHub directory deletion requires removing the individual tracked files.
+
+Never silently delete the entire repository or unrelated files.
+
+Rename and move
+
+GitHub's Contents API does not provide a simple atomic rename operation.
+
+Implement rename or move as a carefully validated sequence:
+
+1. Read the original file.
+2. Create the destination file.
+3. Verify the destination write succeeded.
+4. Delete the original file using its current SHA.
+5. Report any partial failure clearly.
+
+Do not delete the source before verifying the destination.
+
+Warn the owner that references to the original path may need updating.
+
+Commit history
+
+Show recent commits with:
+
+- Commit message.
+- Commit identifier.
+- Date when available.
+- Author information when available.
+- Link to the GitHub commit page.
+
+Do not expose credentials in commit metadata.
+
+---
+
+7. AUTOMATIC PUBLIC URL GENERATION
+
+Generate a public URL for each file using the configured custom domain and its repository path.
+
+For example:
+
+Repository path:
+
+"example/name.html"
+
+Public URL:
+
+"https://omor.asf.sale/example/name.html"
+
+Another example:
+
+Repository path:
+
+"projects/myapp/index.html"
+
+Expected public URL:
+
+"https://omor.asf.sale/projects/myapp/"
+
+The URL generator must account for GitHub Pages path rules, encoded path characters, and the site's configured domain.
+
+Do not include the repository name in the public URL when using the configured custom domain unless the actual deployment structure requires it.
+
+For each eligible file, provide:
+
+- Copy Public URL.
+- Open Preview.
+- Copy Repository Path.
+- Open on GitHub.
+
+Do not assume that a file is already publicly available immediately after a successful API commit.
+
+Display a deployment-pending state where appropriate.
+
+The final URL must be based on the configured deployment root, not an arbitrary user-provided hostname.
+
+Do not expose a public link for an unpublished project unless the owner explicitly requests a preview or direct URL.
+
+---
+
+8. PROJECT LANDING PAGE MANAGEMENT
+
+Allow the owner to create and manage independent landing pages.
+
+Examples:
+
+- "/landingpage/anilog.html"
+- "/landingpage/bdapplist.html"
+- "/projects/myapp/"
+- "/example/name.html"
+
+The exact landing page structure should remain flexible.
+
+Provide a page creation workflow with:
+
+- Page title.
+- Slug.
+- Language.
+- Description.
+- Logo or image.
+- Category.
+- Feature list.
+- Screenshots.
+- Download URL.
+- Demo URL.
+- Source-code URL.
+- Support URL.
+- SEO title.
+- Meta description.
+- Publication status.
+
+Use a reusable landing-page template where useful, but do not force every project to use identical content.
+
+Allow advanced users to edit the HTML, CSS, and JavaScript directly.
+
+Generate valid, accessible HTML.
+
+Do not fabricate download links, app store listings, screenshots, testimonials, ratings, or product claims.
+
+Preserve the existing AniLog landing page. Do not regenerate or replace it without explicit authorization.
+
+---
+
+9. WEBSITE SETTINGS MANAGER
+
+Provide a settings interface for editable website content.
+
+Allow the owner to update:
+
+- Site name.
+- Site description.
+- Profile image.
+- About text in Bengali and English.
+- SupportKori destination.
+- Contact information.
+- Social links.
+- Footer text.
+- Theme defaults.
+- Default language.
+- SEO metadata.
+- Featured projects.
+
+The SupportKori URL should default to:
+
+"https://www.supportkori.com/muhammedomor"
+
+Validate external URLs and allow the owner to change them later.
+
+Use one canonical settings file, such as "site-config.json", if compatible with the existing repository.
+
+Validate the configuration before saving.
+
+If a settings change would overwrite existing content, show a preview and request confirmation.
+
+---
+
+10. SECURITY REQUIREMENTS
+
+Security is a mandatory part of the implementation.
+
+GitHub Pages is static hosting. A client-side admin page is not inherently private merely because it uses a hidden URL.
+
+Implement the following:
+
+1. Never hard-code secrets.
+2. Never expose a GitHub token through public source files.
+3. Use HTTPS.
+4. Restrict requests to the intended GitHub API origin.
+5. Validate repository owner, repository name, branch, paths, and external URLs.
+6. Escape user-controlled text before inserting it into the DOM.
+7. Avoid unsafe HTML injection.
+8. Do not evaluate edited code inside the admin application.
+9. Use sandboxed previews for untrusted content.
+10. Detect file update conflicts.
+11. Protect critical files from accidental deletion.
+12. Use explicit confirmation for destructive actions.
+13. Implement logout and session cleanup.
+14. Avoid unnecessary third-party dependencies.
+15. Do not log authentication tokens.
+16. Do not store credentials in public repository files.
+17. Explain that anyone with a valid token and sufficient permissions can perform the operations allowed by that token.
+18. Recommend repository backups and minimal token permissions.
+
+A browser-only implementation cannot guarantee secure authorization of the "/wp-admin/" page itself. If private access to the admin application, secure persistent sessions, or centralized user authorization is required, propose a separate authentication/backend architecture.
+
+Do not claim that obscurity, a hidden URL, or client-side JavaScript provides strong access control.
+
+---
+
+11. TECHNICAL REQUIREMENTS
+
+Preferred implementation:
+
+- HTML5.
+- CSS3.
+- Vanilla JavaScript.
+- GitHub REST API.
+- GitHub Pages.
+- Local browser storage only for appropriate non-sensitive preferences and explicitly consented session persistence.
+
+Avoid:
+
+- PHP.
+- Node.js server requirements.
+- Mandatory database services.
+- Tailwind CDN.
+- Bootstrap CDN.
+- Google Fonts CDN.
+- Font Awesome CDN.
+- External JavaScript libraries loaded from a CDN.
+- Unnecessary API providers.
+- Fake authentication.
+- Fake deployment success messages.
+
+Use relative paths for internal assets wherever possible so the website remains compatible with the configured domain and deployment structure.
+
+For GitHub API requests, handle:
+
+- Authentication.
+- Repository permissions.
+- HTTP error responses.
+- Rate limiting.
+- File SHA requirements.
+- API content encoding.
+- Network errors.
+- Deployment delays.
+- Concurrent changes.
+
+Use clear modular JavaScript with small, documented functions.
+
+Do not build the entire application in one enormous JavaScript file if separation into modules would make maintenance safer.
+
+If ES modules are used, verify that the selected GitHub Pages deployment serves them correctly and that relative paths resolve from the actual site root.
+
+---
+
+12. PROPOSED FILE STRUCTURE
+
+Adapt this structure to the actual repository instead of forcing a migration.
+
+repository-root/
+├── index.html
+├── projects.js
+├── site-config.json
+├── CNAME
+├── .nojekyll
+│
+├── assets/
+│   ├── css/
+│   │   ├── style.css
+│   │   └── admin.css
+│   ├── js/
+│   │   ├── app.js
+│   │   ├── i18n.js
+│   │   ├── project-manager.js
+│   │   └── github-api.js
+│   └── images/
+│       └── logo.svg
+│
+├── wp-admin/
+│   ├── index.html
+│   ├── login.js
+│   ├── dashboard.js
+│   └── file-manager.js
+│
+├── landingpage/
+│   └── anilog.html
+│
+└── projects/
+    └── ...
+
+The file names are proposals. Preserve existing filenames and deployment conventions whenever necessary.
+
+If the repository uses a GitHub Actions workflow, inspect it before making any deployment-related changes.
+
+Do not replace the existing build or deployment system without a demonstrated need.
+
+---
+
+13. IMPLEMENTATION PHASES
+
+Implement the project in these phases.
+
+Phase 1 — Repository inspection
+
+Inspect the repository if tools and permissions are available.
+
+Identify:
+
+- Publishing branch.
+- Custom domain configuration.
+- Existing root files.
+- Existing assets.
+- Existing AniLog landing page.
+- Existing workflows.
+- Existing URLs that must be preserved.
+
+Create a preservation plan before editing.
+
+If repository access is unavailable, request the repository URL or ask the owner to provide the relevant file tree. Do not invent the existing structure.
+
+Phase 2 — Public website
+
+Build:
+
+- Responsive homepage.
+- Hero and profile section.
+- Project registry integration.
+- Search and category filters.
+- Bengali/English switcher.
+- Dark/light theme.
+- SupportKori buttons.
+- Footer and navigation.
+
+Phase 3 — Admin authentication
+
+Build:
+
+- Login interface.
+- Repository and branch configuration.
+- GitHub API credential validation.
+- Permission checks.
+- Session management.
+- Logout.
+- Clear security notices.
+
+Phase 4 — Repository manager
+
+Build:
+
+- File browser.
+- File reader.
+- Text editor.
+- Create, update, and delete.
+- Upload.
+- Folder creation.
+- Rename and move.
+- Commit history.
+- Error and conflict handling.
+
+Phase 5 — Project CMS
+
+Build:
+
+- Project registry editor.
+- Project creation workflow.
+- Landing-page creation.
+- Project publication controls.
+- Site settings manager.
+- Public URL generator.
+
+Phase 6 — Validation and deployment
+
+Test all critical functions.
+
+Preserve the current GitHub Pages configuration and verify the original AniLog URL.
+
+Provide a safe rollback procedure.
+
+Never claim that a test passed if it was not executed.
+
+---
+
+14. ACCEPTANCE TESTS
+
+The project is not complete until the following behaviors have been verified or clearly identified as untested.
+
+Public site
+
+- The homepage opens at the configured custom domain.
+- The site is usable on Android mobile browsers.
+- Bengali and English switching works.
+- Dark and light themes work.
+- Search and category filters work.
+- Featured projects link to the correct pages.
+- The SupportKori button opens the exact configured URL.
+- The existing AniLog landing page remains available.
+- No unexpected horizontal overflow occurs.
+
+Administration
+
+- Invalid credentials are rejected.
+- Valid credentials are checked against GitHub.
+- Repository permission failures are reported accurately.
+- File listing works.
+- Text files can be created and updated.
+- Uploads use correct content encoding.
+- File deletion requires confirmation.
+- SHA conflicts are handled.
+- Public URL generation follows the configured domain.
+- Logout clears the active authentication state.
+- Tokens do not appear in public source files or logs.
+- Critical configuration files receive additional protection.
+
+Deployment
+
+- GitHub Pages publishing settings remain intact.
+- The CNAME file is preserved.
+- The existing AniLog URL remains unchanged.
+- New pages are accessible after successful deployment.
+- Deployment failures are reported honestly.
+
+---
+
+15. REQUIRED DELIVERABLES
+
+Deliver the following:
+
+1. Complete source code for the public website.
+2. Complete source code for the admin interface.
+3. GitHub API integration.
+4. Project registry and site settings schemas.
+5. File manager and editor.
+6. Project landing-page management.
+7. SupportKori integration.
+8. Bengali and English translations.
+9. Dark and light themes.
+10. Security and deployment documentation.
+11. Exact file paths and instructions for creating or replacing each file.
+12. Mobile-friendly GitHub deployment instructions.
+13. A list of features that were actually tested.
+14. A list of remaining limitations, if any.
+
+When producing code, provide complete files rather than disconnected fragments. Explain exactly where each file belongs.
+
+If you can directly inspect and modify the connected repository, first inspect it and then make minimal, reversible changes. If you cannot access the repository, provide the source files and precise installation instructions instead.
+
+Do not invent repository names, usernames, tokens, email addresses, deployment status, or test results.
+
+Do not stop after producing a design mockup or a proposed architecture. Continue until the requested implementation is complete to the extent supported by the available tools.
+
+Final objective: Build a professional, maintainable, mobile-first project hub at "https://omor.asf.sale/" with a separate GitHub-powered administration interface at "/wp-admin/", independent project landing pages, safe repository management, and a direct SupportKori link to "https://www.supportkori.com/muhammedomor".

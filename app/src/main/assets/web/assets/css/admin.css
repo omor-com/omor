@@ -1,0 +1,421 @@
+/* Omor Project Hub - Admin Panel Stylesheet */
+:root {
+  --admin-bg: #090812;
+  --admin-surface: #121021;
+  --admin-card: #17152b;
+  --admin-card-hover: #1e1b38;
+  --admin-border: #292445;
+  --admin-purple: #a855f7;
+  --admin-cyan: #06b6d4;
+  --admin-green: #22c55e;
+  --admin-red: #ef4444;
+  --admin-yellow: #f59e0b;
+  --admin-text: #f8fafc;
+  --admin-muted: #94a3b8;
+  --admin-dim: #64748b;
+  --admin-radius: 12px;
+}
+
+body.admin-body {
+  background-color: var(--admin-bg);
+  color: var(--admin-text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hind Siliguri', sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Login Screen */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: radial-gradient(circle at top right, rgba(168, 85, 247, 0.12), transparent 50%),
+              radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.08), transparent 50%);
+}
+
+.login-card {
+  background-color: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 520px;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-top: 0.75rem;
+  color: var(--admin-text);
+}
+
+.login-sub {
+  color: var(--admin-muted);
+  font-size: 0.92rem;
+  margin-top: 0.3rem;
+}
+
+.security-notice {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--admin-radius);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  color: #fbbf24;
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  margin-bottom: 0.4rem;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background-color: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--admin-text);
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--admin-purple);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+.form-hint {
+  font-size: 0.78rem;
+  color: var(--admin-dim);
+  margin-top: 0.35rem;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.checkbox-row input[type="checkbox"] {
+  margin-top: 0.25rem;
+  accent-color: var(--admin-purple);
+  width: 18px;
+  height: 18px;
+}
+
+/* Admin Dashboard Layout */
+.admin-header {
+  background-color: var(--admin-surface);
+  border-bottom: 1px solid var(--admin-border);
+  padding: 0.85rem 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.admin-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.repo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  background-color: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  color: var(--admin-cyan);
+}
+
+.admin-nav-tabs {
+  background-color: var(--admin-surface);
+  border-bottom: 1px solid var(--admin-border);
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.25rem 1rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.admin-nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--admin-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  color: var(--admin-text);
+}
+
+.tab-btn.active {
+  color: var(--admin-purple);
+  border-bottom-color: var(--admin-purple);
+  background: rgba(168, 85, 247, 0.05);
+}
+
+.admin-main {
+  flex: 1;
+  padding: 1.5rem 1.25rem 4rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* File Manager UI */
+.file-browser-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background-color: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  font-size: 0.92rem;
+  font-family: monospace;
+}
+
+.breadcrumb-crumb {
+  color: var(--admin-cyan);
+  cursor: pointer;
+}
+
+.breadcrumb-crumb:hover {
+  text-decoration: underline;
+}
+
+.file-list-card {
+  background-color: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  overflow: hidden;
+}
+
+.file-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--admin-border);
+  transition: background-color 0.15s;
+}
+
+.file-row:last-child {
+  border-bottom: none;
+}
+
+.file-row:hover {
+  background-color: var(--admin-card-hover);
+}
+
+.file-info-col {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  cursor: pointer;
+  flex: 1;
+}
+
+.file-name {
+  font-weight: 500;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-actions-col {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+/* Code Editor */
+.editor-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background-color: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-bottom: none;
+  border-top-left-radius: var(--admin-radius);
+  border-top-right-radius: var(--admin-radius);
+  padding: 0.75rem 1rem;
+}
+
+.editor-path {
+  font-family: monospace;
+  font-size: 0.92rem;
+  color: var(--admin-cyan);
+  font-weight: 600;
+}
+
+.editor-textarea {
+  width: 100%;
+  min-height: 480px;
+  background-color: #05040a;
+  border: 1px solid var(--admin-border);
+  border-bottom-left-radius: var(--admin-radius);
+  border-bottom-right-radius: var(--admin-radius);
+  color: #38bdf8;
+  font-family: 'Consolas', 'Fira Code', Monaco, monospace;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  padding: 1rem;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.editor-textarea:focus {
+  outline: none;
+  border-color: var(--admin-purple);
+}
+
+/* Commit History Items */
+.commit-item {
+  background-color: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.commit-msg {
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--admin-text);
+}
+
+.commit-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.82rem;
+  color: var(--admin-muted);
+}
+
+.commit-sha {
+  font-family: monospace;
+  background: var(--admin-surface);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  color: var(--admin-cyan);
+}
+
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toast {
+  padding: 0.85rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.25s ease;
+  max-width: 360px;
+}
+
+.toast-success {
+  background-color: #15803d;
+  border: 1px solid #22c55e;
+}
+
+.toast-error {
+  background-color: #b91c1c;
+  border: 1px solid #ef4444;
+}
+
+.toast-info {
+  background-color: #1d4ed8;
+  border: 1px solid #3b82f6;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

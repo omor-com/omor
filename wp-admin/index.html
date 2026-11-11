@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omor Project Hub — Administration CMS</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- ==================== LOGIN VIEW ==================== -->
+  <div id="loginView" class="login-wrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <img src="../assets/images/logo.svg" alt="Omor Hub Logo" width="56" height="56" style="margin: 0 auto;">
+        <h1 class="login-title">Omor Admin CMS</h1>
+        <p class="login-sub">GitHub-Powered Administration for omor.asf.sale</p>
+      </div>
+
+      <div class="security-notice">
+        <strong>🔒 Static Architecture Notice:</strong> This administration application runs 100% client-side and communicates directly with the official GitHub REST API. Your Personal Access Token (PAT) is never sent to any intermediary server.
+      </div>
+
+      <div id="loginErrorBox" style="display: none; background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #f87171; padding: 0.85rem; border-radius: 8px; margin-bottom: 1.25rem; font-size: 0.88rem;"></div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label" for="repoOwnerInput">GitHub Repository Owner</label>
+          <input type="text" id="repoOwnerInput" class="form-input" placeholder="e.g. muhammedomor" value="muhammedomor" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="repoNameInput">Repository Name</label>
+          <input type="text" id="repoNameInput" class="form-input" placeholder="e.g. omor-project-hub" value="omor-project-hub" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="branchInput">Publishing Branch</label>
+          <input type="text" id="branchInput" class="form-input" placeholder="main" value="main" required>
+          <p class="form-hint">Branch published via GitHub Pages (usually 'main' or 'gh-pages').</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="usernameInput">GitHub Username</label>
+          <input type="text" id="usernameInput" class="form-input" placeholder="e.g. muhammedomor" value="muhammedomor">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="tokenInput">GitHub Personal Access Token (PAT)</label>
+          <input type="password" id="tokenInput" class="form-input" placeholder="ghp_... or github_pat_..." autocomplete="current-password" required>
+          <p class="form-hint">Requires <code>repo</code> permissions for classic tokens, or 'Contents: Read and write' for fine-grained tokens.</p>
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="rememberMeCheck">
+          <label for="rememberMeCheck" style="font-size: 0.88rem; color: var(--admin-muted);">
+            Remember credentials in this browser (stores in localStorage on this device).
+          </label>
+        </div>
+
+        <button type="submit" id="loginSubmitBtn" class="btn btn-primary" style="width: 100%;">
+          Connect to Repository
+        </button>
+
+        <div style="margin-top: 1.25rem; text-align: center;">
+          <a href="../index.html" style="font-size: 0.88rem; color: var(--admin-muted);">← Return to Public Website</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== DASHBOARD VIEW ==================== -->
+  <div id="dashboardView" style="display: none; min-height: 100vh; flex-direction: column;">
+
+    <!-- Top Admin Header -->
+    <header class="admin-header">
+      <div class="admin-header-inner">
+        <div class="admin-brand">
+          <img src="../assets/images/logo.svg" alt="Logo" width="28" height="28">
+          <span>OMOR <span style="color: var(--admin-purple);">ADMIN</span></span>
+          <span class="repo-pill" id="adminRepoBadge">muhammedomor/repo</span>
+          <span class="repo-pill" style="color: var(--admin-purple);" id="adminBranchBadge">main</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <a href="../index.html" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="View Public Website">
+            🌐 View Site
+          </a>
+          <button id="adminLogoutBtn" class="btn btn-secondary btn-sm" style="color: var(--admin-red);">
+            Log Out
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="admin-nav-tabs" aria-label="Admin Navigation Tabs">
+      <button class="tab-btn active" data-tab="dashboardTab">📊 Overview</button>
+      <button class="tab-btn" data-tab="projectCmsTab">🚀 Project CMS</button>
+      <button class="tab-btn" data-tab="landingBuilderTab">📄 Landing Builder</button>
+      <button class="tab-btn" data-tab="filesTab">📁 File Manager</button>
+      <button class="tab-btn" data-tab="editorTab">✏️ File Editor</button>
+      <button class="tab-btn" data-tab="uploadTab">⬆️ Upload File</button>
+      <button class="tab-btn" data-tab="settingsTab">⚙️ Site Settings</button>
+      <button class="tab-btn" data-tab="urlGenTab">🔗 URL Generator</button>
+      <button class="tab-btn" data-tab="historyTab">📜 Commits</button>
+    </nav>
+
+    <!-- Main Admin Workspace -->
+    <main class="admin-main">
+
+      <!-- TAB 1: OVERVIEW -->
+      <section id="dashboardTab" class="tab-panel active">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+          <div class="login-card" style="padding: 1.5rem; max-width: 100%;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--admin-cyan);">Live Domain</h3>
+            <p style="font-size: 1.3rem; font-weight: 700; color: var(--admin-text); word-break: break-all;">https://omor.asf.sale/</p>
+            <p style="font-size: 0.85rem; color: var(--admin-muted); margin-top: 0.25rem;">Custom domain mapped via CNAME</p>
+          </div>
+
+          <div class="login-card" style="padding: 1.5rem; max-width: 100%;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--admin-purple);">Repository Status</h3>
+            <p style="font-size: 1.3rem; font-weight: 700; color: var(--admin-text);" id="dashVisibility">Public</p>
+            <p style="font-size: 0.85rem; color: var(--admin-muted); margin-top: 0.25rem;" id="dashRepoDesc">Loading...</p>
+          </div>
+
+          <div class="login-card" style="padding: 1.5rem; max-width: 100%;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--admin-green);">Active Branch</h3>
+            <p style="font-size: 1.3rem; font-weight: 700; color: var(--admin-text);" id="dashDefaultBranch">main</p>
+            <p style="font-size: 0.85rem; color: var(--admin-muted); margin-top: 0.25rem;">GitHub Pages active publishing target</p>
+          </div>
+        </div>
+
+        <div class="file-browser-bar">
+          <h2 style="font-size: 1.25rem; color: var(--admin-text);">Recent Repository Activity</h2>
+          <button class="btn btn-secondary btn-sm" onclick="window.DashboardManager.loadDashboardData()">🔄 Refresh</button>
+        </div>
+        <div id="dashRecentCommits">
+          <!-- Populated by loadDashboardData -->
+        </div>
+      </section>
+
+      <!-- TAB 2: PROJECT CMS -->
+      <section id="projectCmsTab" class="tab-panel">
+        <div class="file-browser-bar">
+          <div>
+            <h2 style="font-size: 1.25rem; color: var(--admin-text);">Project Registry (projects.json)</h2>
+            <p style="font-size: 0.85rem; color: var(--admin-muted);">Add, edit, feature, and toggle publication status of projects.</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="openAddProjectModalBtn" class="btn btn-primary btn-sm">+ Add New Project</button>
+            <button class="btn btn-secondary btn-sm" onclick="window.DashboardManager.loadProjectRegistry()">🔄 Reload</button>
+          </div>
+        </div>
+
+        <div id="projectCmsList" class="file-list-card">
+          <!-- Populated by DashboardManager -->
+        </div>
+      </section>
+
+      <!-- TAB 3: LANDING BUILDER -->
+      <section id="landingBuilderTab" class="tab-panel">
+        <div class="login-card" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+          <h2 style="font-size: 1.35rem; color: var(--admin-text); margin-bottom: 0.5rem;">Create Project Landing Page</h2>
+          <p style="font-size: 0.88rem; color: var(--admin-muted); margin-bottom: 1.5rem;">Generates a mobile-friendly, accessible static landing page in <code>landingpage/{slug}.html</code> and commits directly to your repository.</p>
+
+          <form id="landingBuilderForm">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="genPageTitle">Project Name / Title</label>
+                <input type="text" id="genPageTitle" class="form-input" placeholder="e.g. BD App List" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="genPageSlug">URL Slug (filename)</label>
+                <input type="text" id="genPageSlug" class="form-input" placeholder="e.g. bdapplist" required>
+                <p class="form-hint">Will produce <code>landingpage/bdapplist.html</code></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="genPageBadge">Type / Platform Badge</label>
+              <input type="text" id="genPageBadge" class="form-input" placeholder="e.g. Android Application • v1.0">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="genPageIntro">Short Description</label>
+              <textarea id="genPageIntro" class="form-textarea" rows="3" placeholder="Briefly introduce the purpose, benefits, and key audience of the software..." required></textarea>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="genFeature1Title">Feature 1 Heading</label>
+                <input type="text" id="genFeature1Title" class="form-input" placeholder="e.g. Fast & Offline">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="genFeature1Desc">Feature 1 Detail</label>
+                <input type="text" id="genFeature1Desc" class="form-input" placeholder="e.g. Works 100% locally with zero latency.">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="genFeature2Title">Feature 2 Heading</label>
+                <input type="text" id="genFeature2Title" class="form-input" placeholder="e.g. Material Design">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="genFeature2Desc">Feature 2 Detail</label>
+                <input type="text" id="genFeature2Desc" class="form-input" placeholder="e.g. Clean interface with dynamic Android 12+ colors.">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="genDownloadUrl">Download / APK URL</label>
+                <input type="url" id="genDownloadUrl" class="form-input" placeholder="https://...">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="genGithubUrl">GitHub Source URL</label>
+                <input type="url" id="genGithubUrl" class="form-input" placeholder="https://github.com/muhammedomor/...">
+              </div>
+            </div>
+
+            <div class="checkbox-row">
+              <input type="checkbox" id="genAddToRegistryCheck" checked>
+              <label for="genAddToRegistryCheck" style="font-size: 0.88rem; color: var(--admin-muted);">
+                Also automatically add this new project to <code>projects.json</code> registry.
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              🚀 Generate &amp; Commit Landing Page
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- TAB 4: FILE MANAGER -->
+      <section id="filesTab" class="tab-panel">
+        <div class="file-browser-bar">
+          <div class="breadcrumbs" id="fileBreadcrumbs">
+            <span class="breadcrumb-crumb" onclick="window.FileManager.loadDirectory('')">root</span>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button id="createNewFileBtn" class="btn btn-primary btn-sm">+ New File</button>
+            <button id="createNewFolderBtn" class="btn btn-secondary btn-sm">+ New Folder</button>
+            <button class="btn btn-secondary btn-sm" onclick="window.FileManager.loadDirectory(window.FileManager.currentPath)">🔄 Refresh</button>
+          </div>
+        </div>
+
+        <div id="fileListContainer" class="file-list-card">
+          <!-- Populated by FileManager -->
+        </div>
+      </section>
+
+      <!-- TAB 5: FILE EDITOR -->
+      <section id="editorTab" class="tab-panel">
+        <div class="editor-header">
+          <div>
+            <span style="font-size: 0.85rem; color: var(--admin-dim);">Editing:</span>
+            <span id="editorCurrentPath" class="editor-path">No file selected</span>
+            <span id="editorStatusBadge" style="margin-left: 0.75rem; font-size: 0.82rem; font-weight: 600; color: var(--admin-dim);">Saved</span>
+          </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <input type="text" id="editorCommitMessage" class="form-input" style="padding: 0.45rem 0.75rem; font-size: 0.85rem; width: 220px;" placeholder="Commit message...">
+            <button id="editorSaveBtn" class="btn btn-primary btn-sm">Save &amp; Commit</button>
+          </div>
+        </div>
+
+        <textarea id="editorContentTextarea" class="editor-textarea" placeholder="Open a file from the File Manager tab to start editing code..."></textarea>
+      </section>
+
+      <!-- TAB 6: BINARY UPLOADER -->
+      <section id="uploadTab" class="tab-panel">
+        <div class="login-card" style="max-width: 600px; margin: 0 auto; padding: 2rem;">
+          <h2 style="font-size: 1.35rem; color: var(--admin-text); margin-bottom: 0.5rem;">Upload File to Repository</h2>
+          <p style="font-size: 0.88rem; color: var(--admin-muted); margin-bottom: 1.5rem;">Upload images (PNG, JPG, SVG, WebP) or static assets directly from your mobile phone or computer into the GitHub repository.</p>
+
+          <form id="uploadFileForm">
+            <div class="form-group">
+              <label class="form-label" for="uploadFileInput">Choose File</label>
+              <input type="file" id="uploadFileInput" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="uploadDestPathInput">Destination Repository Path</label>
+              <input type="text" id="uploadDestPathInput" class="form-input" placeholder="e.g. assets/images/screenshot.png">
+              <p class="form-hint">Leave blank to default to <code>assets/images/{filename}</code>.</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="uploadCommitMsgInput">Commit Message</label>
+              <input type="text" id="uploadCommitMsgInput" class="form-input" placeholder="Upload asset via Omor Admin CMS">
+            </div>
+
+            <button type="submit" id="uploadSubmitBtn" class="btn btn-primary" style="width: 100%;">
+              Upload File
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- TAB 7: SITE SETTINGS -->
+      <section id="settingsTab" class="tab-panel">
+        <div class="login-card" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+          <h2 style="font-size: 1.35rem; color: var(--admin-text); margin-bottom: 0.5rem;">Site Settings (site-config.json)</h2>
+          <p style="font-size: 0.88rem; color: var(--admin-muted); margin-bottom: 1.5rem;">Configure global website text, bilingual introductions, and verified SupportKori destinations.</p>
+
+          <form id="siteSettingsForm">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="settingsSiteName">Site Brand Name</label>
+                <input type="text" id="settingsSiteName" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="settingsOwnerName">Owner Display Name</label>
+                <input type="text" id="settingsOwnerName" class="form-input" required>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="settingsTaglineEn">Tagline (English)</label>
+                <input type="text" id="settingsTaglineEn" class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="settingsTaglineBn">Tagline (বাংলা)</label>
+                <input type="text" id="settingsTaglineBn" class="form-input">
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="settingsIntroEn">Hero Intro (English)</label>
+                <textarea id="settingsIntroEn" class="form-textarea" rows="2"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="settingsIntroBn">Hero Intro (বাংলা)</label>
+                <textarea id="settingsIntroBn" class="form-textarea" rows="2"></textarea>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="settingsAboutEn">About Text (English)</label>
+                <textarea id="settingsAboutEn" class="form-textarea" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="settingsAboutBn">About Text (বাংলা)</label>
+                <textarea id="settingsAboutBn" class="form-textarea" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="settingsSupportKori">SupportKori URL</label>
+              <input type="url" id="settingsSupportKori" class="form-input" value="https://www.supportkori.com/muhammedomor" required>
+              <p class="form-hint">Default: https://www.supportkori.com/muhammedomor</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label class="form-label" for="settingsGithub">GitHub Profile URL</label>
+                <input type="url" id="settingsGithub" class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="settingsEmail">Contact Email</label>
+                <input type="email" id="settingsEmail" class="form-input">
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              Save Site Settings to GitHub
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- TAB 8: URL GENERATOR -->
+      <section id="urlGenTab" class="tab-panel">
+        <div class="login-card" style="max-width: 700px; margin: 0 auto; padding: 2rem;">
+          <h2 style="font-size: 1.35rem; color: var(--admin-text); margin-bottom: 0.5rem;">Automatic Public URL Generator</h2>
+          <p style="font-size: 0.88rem; color: var(--admin-muted); margin-bottom: 1.5rem;">Calculates the exact public URL using GitHub Pages rules and the configured custom domain <code>https://omor.asf.sale/</code>.</p>
+
+          <div class="form-group">
+            <label class="form-label" for="urlGenInput">Enter Repository File Path</label>
+            <input type="text" id="urlGenInput" class="form-input" placeholder="e.g. landingpage/anilog.html or projects/tool/index.html" value="landingpage/anilog.html">
+          </div>
+
+          <div style="background-color: var(--admin-surface); border: 1px solid var(--admin-border); border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem;">
+            <span style="font-size: 0.8rem; color: var(--admin-dim); text-transform: uppercase;">Public URL Result:</span>
+            <p id="urlGenResult" style="font-family: monospace; font-size: 1.15rem; color: var(--admin-cyan); margin-top: 0.25rem; word-break: break-all;">
+              https://omor.asf.sale/landingpage/anilog.html
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="navigator.clipboard.writeText(document.getElementById('urlGenResult').textContent); window.DashboardManager.showToast('Copied public URL!', 'success');">
+              📋 Copy Public URL
+            </button>
+            <button class="btn btn-secondary" onclick="window.open(document.getElementById('urlGenResult').textContent, '_blank')">
+              🌐 Open in New Tab
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 9: COMMITS -->
+      <section id="historyTab" class="tab-panel">
+        <div class="file-browser-bar">
+          <h2 style="font-size: 1.25rem; color: var(--admin-text);">Recent Commits on Branch</h2>
+          <button class="btn btn-secondary btn-sm" onclick="window.DashboardManager.loadCommitHistory()">🔄 Reload</button>
+        </div>
+        <div id="commitHistoryList">
+          <!-- Populated by loadCommitHistory -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==================== PROJECT CMS MODAL ==================== -->
+  <div id="projectModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" onclick="window.DashboardManager.closeProjectModal()">✕</button>
+      <h2 id="projectModalTitle" style="font-size: 1.3rem; margin-bottom: 1.25rem; color: var(--admin-text);">Add New Project</h2>
+
+      <form id="projectCmsForm">
+        <input type="hidden" id="projectIdInput">
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="projectNameInput">Project Name</label>
+            <input type="text" id="projectNameInput" class="form-input" placeholder="e.g. AniLog" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="projectSlugInput">Slug</label>
+            <input type="text" id="projectSlugInput" class="form-input" placeholder="e.g. anilog" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="projectCategorySelect">Category</label>
+            <select id="projectCategorySelect" class="form-select">
+              <option value="android">Android Apps</option>
+              <option value="web">Web Applications</option>
+              <option value="tools">Developer Tools</option>
+              <option value="games">Games</option>
+              <option value="digital">Digital Products</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="projectStatusSelect">Status</label>
+            <select id="projectStatusSelect" class="form-select">
+              <option value="published">Published</option>
+              <option value="beta">Beta</option>
+              <option value="wip">In Development</option>
+              <option value="draft">Draft (Unpublished)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="projectDescEnInput">Description (English)</label>
+          <textarea id="projectDescEnInput" class="form-textarea" rows="2" placeholder="English summary for project card..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="projectDescBnInput">Description (বাংলা)</label>
+          <textarea id="projectDescBnInput" class="form-textarea" rows="2" placeholder="বাংলা বিবরণ..."></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="projectLandingInput">Landing Page Path</label>
+            <input type="text" id="projectLandingInput" class="form-input" placeholder="landingpage/anilog.html">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="projectVersionInput">Version</label>
+            <input type="text" id="projectVersionInput" class="form-input" placeholder="1.0.0">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="projectDownloadInput">Download / APK URL</label>
+            <input type="url" id="projectDownloadInput" class="form-input" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="projectDemoInput">Demo URL</label>
+            <input type="url" id="projectDemoInput" class="form-input" placeholder="https://...">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="projectGithubInput">GitHub Repository URL</label>
+            <input type="url" id="projectGithubInput" class="form-input" placeholder="https://github.com/...">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="projectTagsInput">Tags (comma-separated)</label>
+            <input type="text" id="projectTagsInput" class="form-input" placeholder="Android, Kotlin, Anime">
+          </div>
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="projectFeaturedCheck">
+          <label for="projectFeaturedCheck" style="font-size: 0.88rem; color: var(--admin-text);">
+            ★ Feature this project prominently on the homepage
+          </label>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary" onclick="window.DashboardManager.closeProjectModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save to Registry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/github-api.js"></script>
+  <script src="login.js"></script>
+  <script src="file-manager.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
